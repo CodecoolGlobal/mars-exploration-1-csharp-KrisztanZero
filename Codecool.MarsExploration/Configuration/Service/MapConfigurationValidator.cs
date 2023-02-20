@@ -12,7 +12,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
     private bool CheckTotalNumberOfElements(MapConfiguration mapConfig)
     {
         int totalElementCount =
-            mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.ElementCount));
+            mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.Dimension));
         
         int maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
 
