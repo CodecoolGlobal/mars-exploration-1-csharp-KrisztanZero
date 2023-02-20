@@ -7,38 +7,24 @@ public class MapConfigurationValidator : IMapConfigurationValidator
     public bool Validate(MapConfiguration mapConfig)
     {
         // Check that the total number of elements doesn't exceed ElementToSpaceRatio
-        int totalElementCount = mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.ElementCount));
-        int maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
+        var totalElementCount = mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.ElementCount));
+        var maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
         if (totalElementCount > maxElementCount)
         {
             return false;
         }
 
         // Check that all elements are 1-dimensional or 2-dimensional
-        foreach (var config in mapConfig.MapElementConfigurations)
+        if (mapConfig.MapElementConfigurations.SelectMany(config => config.ElementsToDimensions).Any(elementToDimension => true))
         {
-            foreach (var elementToDimension in config.ElementsToDimensions)
-            {
-                if (elementToDimension.Dimension != 1 || elementToDimension.Dimension != 2)
-                {
-                    return false;
-                }
-            }
+            return false;
         }
 
         // Check that there are no multi-dimensional minerals
         var mineralConfig = mapConfig.MapElementConfigurations.FirstOrDefault(config => config.Symbol == "M");
-        if (mineralConfig != null)
+        if (mineralConfig == null) return true;
         {
-            foreach (var elementToDimension in mineralConfig.ElementsToDimensions)
-            {
-                if (elementToDimension.Dimension > 1)
-                {
-                    return false;
-                }
-            }
+            return mineralConfig.ElementsToDimensions.All(elementToDimension => elementToDimension.Dimension <= 1);
         }
-
-        return true;
     }
 }
