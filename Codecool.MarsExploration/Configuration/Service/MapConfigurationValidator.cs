@@ -6,25 +6,66 @@ public class MapConfigurationValidator : IMapConfigurationValidator
 {
     public bool Validate(MapConfiguration mapConfig)
     {
-        // Check that the total number of elements doesn't exceed ElementToSpaceRatio
-        var totalElementCount = mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.ElementCount));
-        var maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
-        if (totalElementCount > maxElementCount)
-        {
-            return false;
-        }
-
-        // Check that all elements are 1-dimensional or 2-dimensional
-        if (mapConfig.MapElementConfigurations.SelectMany(config => config.ElementsToDimensions).Any(elementToDimension => true))
-        {
-            return false;
-        }
-
-        // Check that there are no multi-dimensional minerals
-        var mineralConfig = mapConfig.MapElementConfigurations.FirstOrDefault(config => config.Symbol == "M");
-        if (mineralConfig == null) return true;
-        {
-            return mineralConfig.ElementsToDimensions.All(elementToDimension => elementToDimension.Dimension <= 1);
-        }
+        return CheckTotalNumberOfElements(mapConfig) && CheckValidDimensionOfElements(mapConfig);
     }
+
+    private bool CheckTotalNumberOfElements(MapConfiguration mapConfig)
+    {
+        int totalElementCount =
+            mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.ElementCount));
+        
+        int maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
+
+        return totalElementCount < maxElementCount;
+    }
+
+    private bool CheckValidDimensionOfElements(MapConfiguration mapConfig)
+    {
+        foreach (var config in mapConfig.MapElementConfigurations)
+        {
+            switch (config.Name)
+            {
+                case "mountain":
+                {
+                    foreach (var element in config.ElementsToDimensions)
+                    {
+                        return element.Dimension > 1 && config.DimensionGrowth == 3;
+                    }
+
+                    break;
+                }
+                case "pit":
+                {
+                    foreach (var element in config.ElementsToDimensions)
+                    {
+                        return element.Dimension > 1 && config.DimensionGrowth == 10;
+                    }
+
+                    break;
+                }
+                case "mineral":
+                {
+                    foreach (var element in config.ElementsToDimensions)
+                    {
+                        return element.Dimension == 1 && config.DimensionGrowth == 0;
+                    }
+
+                    break;
+                }
+                case "water":
+                {
+                    foreach (var element in config.ElementsToDimensions)
+                    {
+                        return element.Dimension == 1 && config.DimensionGrowth == 0;
+                    }
+
+                    break;
+                }
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
+    
 }
