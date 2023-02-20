@@ -13,7 +13,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
     {
         int totalElementCount =
             mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.Dimension));
-        
+
         int maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
 
         return totalElementCount < maxElementCount;
@@ -29,7 +29,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
                 {
                     foreach (var element in config.ElementsToDimensions)
                     {
-                        return element.Dimension > 1 && config.DimensionGrowth == 3;
+                        return element.Dimension > 1 && config is { DimensionGrowth: 3, Symbol: "#" };
                     }
 
                     break;
@@ -38,7 +38,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
                 {
                     foreach (var element in config.ElementsToDimensions)
                     {
-                        return element.Dimension > 1 && config.DimensionGrowth == 10;
+                        return element.Dimension > 1 && config is { DimensionGrowth: 10, Symbol: "&" };
                     }
 
                     break;
@@ -47,7 +47,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
                 {
                     foreach (var element in config.ElementsToDimensions)
                     {
-                        return element.Dimension == 1 && config.DimensionGrowth == 0;
+                        return element.Dimension == 1 && config is { DimensionGrowth: 0, Symbol: "%" };
                     }
 
                     break;
@@ -56,7 +56,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
                 {
                     foreach (var element in config.ElementsToDimensions)
                     {
-                        return element.Dimension == 1 && config.DimensionGrowth == 0;
+                        return element.Dimension == 1 && config is { DimensionGrowth: 0, Symbol: "*" };
                     }
 
                     break;
@@ -65,7 +65,7 @@ public class MapConfigurationValidator : IMapConfigurationValidator
                     return false;
             }
         }
+
         return false;
     }
-    
 }
