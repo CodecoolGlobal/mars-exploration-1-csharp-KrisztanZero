@@ -8,46 +8,33 @@ public class MapElementBuilder : IMapElementBuilder
     public MapElement Build(int size, string symbol, string name, int dimensionGrowth, string? preferredLocationSymbol = null)
     {
         // string?[,] Representation, string Name, int Dimension, string? PreferredLocationSymbol = null
-        /*
-        this is the string?[,] Representation of a size: 16, dimensionGroth: 2 mountain
-        
-        [        ]         [####  ]
-        [        ]         [####  ]
-        [  ####  ]         [####  ]
-        [  ####  ]         [####  ]
-        [  ####  ]         [      ]
-        [  ####  ]         [      ]
-        [        ]
-        [        ]
-        
-        */
-        
-        // create line with symbols
-        //   - create string array, length = dimension,
-        //   - write sybil dimension - dimensionGrowth times
-        //   - write space dimensionGrowth times
-        
-        
-        
-        // create line with spaces
-        //   - write spaces dimension times
-        
-        
-        // add lines to matrix
-        
-        
         
         var dimensionCalculator = new DimensionCalculator();
         var dimension = dimensionCalculator.CalculateDimension(size, dimensionGrowth);
+        var representation = Representation(dimension, dimensionGrowth, symbol);
 
-        
-        
-        var representation = new string?[,]{};
+        return new MapElement(representation, name, dimension, preferredLocationSymbol);
 
-
-        //MapElement mapElement = new()
-        throw new NotImplementedException();
     }
-    
+
+    public string?[,] Representation(int dimension, int dimensionGrowth, string symbol)
+    {
+        string[,] myArray = new string[dimension,dimension];
+        
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (i < dimension - dimensionGrowth || j < dimension - dimensionGrowth)
+                {
+                    myArray[i, j] = symbol;
+                }
+                else
+                {
+                    myArray[i, j] = " ";
+                }
+            }
+        }
+
+        return myArray;
+    }
     
 }
