@@ -21,6 +21,22 @@ public class MapElementBuilder : IMapElementBuilder
         [        ]
         
         */
+        
+        // create line with symbols
+        //   - create string array, length = dimension,
+        //   - write sybil dimension - dimensionGrowth times
+        //   - write space dimensionGrowth times
+        
+        
+        
+        // create line with spaces
+        //   - write spaces dimension times
+        
+        
+        // add lines to matrix
+        
+        
+        
         var dimensionCalculator = new DimensionCalculator();
         var dimension = dimensionCalculator.CalculateDimension(size, dimensionGrowth);
 
@@ -33,9 +49,5 @@ public class MapElementBuilder : IMapElementBuilder
         throw new NotImplementedException();
     }
     
-    private string[] getrepresentationLine(int dimension, int dimensionGrowth, string symbol)
-    {
-        string[] line = { };
-        return line;
-    }
+    
 }

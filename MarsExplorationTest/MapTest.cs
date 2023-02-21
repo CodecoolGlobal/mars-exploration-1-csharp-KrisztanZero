@@ -4,22 +4,19 @@ namespace MarsExplorationTest;
 
 public class MapTest
 {
-    private static readonly string?[,] TestRepresentation = new string?[,]
-    { 
-        { "one", "two", "three" }, 
-        { "four", "five", "six" },
-        { "seven", "eight", "nine" }
-    };
-
-    private readonly Map _map = new Map(TestRepresentation);
-    
-    [Test]
-    
-    public void TestCreateStringRepresentation()
+    private static readonly string[,] Representation =
     {
-        var expected = "one\ntwo\nthree\nfour\nfive\nsix\nseven\neight\nnine\n";
-        var actual = _map.CreateStringRepresentation(TestRepresentation);
-        
+        {"#","#"," "},
+        {"#","#"," "},
+        {" "," "," "}
+    };
+    private readonly Map _map = new(Representation);
+
+    [Test]
+    public void ToStringTest()
+    {
+        var expected = "## \n## \n   \n";
+        var actual = _map.ToString();
         Assert.That(expected, Is.EquivalentTo(actual));
     }
 }
