@@ -8,27 +8,34 @@ public class CoordinateCalculator : ICoordinateCalculator
 
     public Coordinate GetRandomCoordinate(int dimension)
     {
-        var x = _random.Next(dimension);
-        var y = _random.Next(dimension);
+        // check if element is not outside map - once mapgeneration is ready
+        // upper limit is MapConfiguration.MapSize - dimension
+        var x = _random.Next();
+        var y = _random.Next();
         return new Coordinate(x, y);
     }
 
     public IEnumerable<Coordinate> GetAdjacentCoordinates(Coordinate coordinate, int dimension)
     {
-        List<Coordinate> adjancentCoordinates = new List<Coordinate>();
+        List<Coordinate> adjacentCoordinates = new List<Coordinate>();
 
-        for (int i = coordinate.X; i <= coordinate.X + 1; i++)
+        for (var i = coordinate.X; i < coordinate.X + dimension; i++)
         {
-            for (int j = coordinate.Y; j <= coordinate.Y + 1; j++)
-            {
-                if (i >= 0 && i < dimension && j >= 0 && j < dimension && (i != coordinate.X || j != coordinate.Y))
-                {
-                    adjancentCoordinates.Add(new Coordinate(i,j));
-                }
-            }
+            var upperBound = new Coordinate(i, coordinate.Y - 1);
+            adjacentCoordinates.Add(upperBound);
+            var lowerBound = new Coordinate(i, coordinate.Y + dimension);
+            adjacentCoordinates.Add(lowerBound);
         }
 
-        return adjancentCoordinates;
+        for (int i = coordinate.Y; i < coordinate.Y + dimension; i++)
+        {
+            var leftBound = new Coordinate(coordinate.X - 1, i); 
+            adjacentCoordinates.Add(leftBound);
+            var rightBound = new Coordinate(coordinate.X + dimension, i);
+            adjacentCoordinates.Add(rightBound);
+        }
+
+        return adjacentCoordinates;
     }
 
     public IEnumerable<Coordinate> GetAdjacentCoordinates(IEnumerable<Coordinate> coordinates, int dimension)
