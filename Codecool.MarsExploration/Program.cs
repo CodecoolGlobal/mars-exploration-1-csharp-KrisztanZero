@@ -56,6 +56,6 @@ internal class Program
         }, 3);
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg };
-        return new MapConfiguration(20, 0.5, elementsCfg);
+        return new MapConfiguration(100, 0.5, elementsCfg);
     }
 }
