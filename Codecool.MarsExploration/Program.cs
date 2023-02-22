@@ -16,16 +16,16 @@ internal class Program
         Console.WriteLine("Mars Exploration Sprint 1");
         var mapConfig = GetConfiguration();
 
-        IDimensionCalculator dimensionCalculator = null;
-        ICoordinateCalculator coordinateCalculator = null;
+        IDimensionCalculator dimensionCalculator = new DimensionCalculator();
+        ICoordinateCalculator coordinateCalculator = new CoordinateCalculator();
 
-        IMapElementBuilder mapElementFactory = null;
-        IMapElementsGenerator mapElementsGenerator = null;
+        IMapElementBuilder mapElementFactory = new MapElementBuilder();
+        IMapElementsGenerator mapElementsGenerator = new MapElementsGenerator();
 
-        IMapConfigurationValidator mapConfigValidator = null;
-        IMapElementPlacer mapElementPlacer = null;
+        IMapConfigurationValidator mapConfigValidator = new MapConfigurationValidator();
+        IMapElementPlacer mapElementPlacer = new MapElementPlacer();
 
-        IMapGenerator mapGenerator = null;
+        IMapGenerator mapGenerator = new MapGenerator();
 
         CreateAndWriteMaps(3, mapGenerator, mapConfig);
 
@@ -35,6 +35,11 @@ internal class Program
 
     private static void CreateAndWriteMaps(int count, IMapGenerator mapGenerator, MapConfiguration mapConfig)
     {
+        var mapFileWriter = new MapFileWriter();
+        for (int i = 0; i < count; i++)
+        {
+            mapFileWriter.WriteMapFile(mapGenerator.Generate(mapConfig), "Output/MapFile/map.txt");
+        }
     }
 
     private static MapConfiguration GetConfiguration()
