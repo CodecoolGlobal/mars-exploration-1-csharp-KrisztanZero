@@ -11,17 +11,21 @@ public class MapElementPlacer : IMapElementPlacer
     {
         // check if element is still on map
         bool elementIsOnMap = coordinate.X + element.Dimension < map.GetLength(0) && coordinate.Y + element.Dimension < map.GetLength(1);
-
+        if (!elementIsOnMap) return false;
+        
         // check if area at coordinate is available
         bool coordinateIsTaken = false;
         for (int i = 0; i < map.GetLength(0); i++)
         {
-            for (int j = 0; j < map.GetLength(1); j++)
+            for (var j = 0; j < element.Dimension; j++)
             {
-                if (map[i, j] == " ") continue;
-                coordinateIsTaken = true;
-                break;
+                if (map[i + coordinate.Y,j + coordinate.X]  != " ")
+                {
+                    coordinateIsTaken = true;
+                    break;
+                }
             }
+         
         }
 
         // check adjacent coordinates if that prevents element from being placed on map
