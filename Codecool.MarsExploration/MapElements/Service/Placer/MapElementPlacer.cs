@@ -14,13 +14,18 @@ public class MapElementPlacer : IMapElementPlacer
 
         // check if area at coordinate is available
         bool coordinateIsTaken = false;
-        for (int i = 0; i < element.Dimension; i++)
+        for (int i = 0; i < map.GetLength(0); i++)
         {
-            for (int j = 0; j < element.Dimension; j++)
+            for (var j = 0; j < 5; j++)
             {
-                if (map[i, j] == " ") coordinateIsTaken = true;
-                break;
+                if (map[i, j] != " ")
+                {
+                    coordinateIsTaken = true;
+                    break;
+                }
+                
             }
+            
         }
 
         // check adjecent coordinates if that prevents element from being placed on map

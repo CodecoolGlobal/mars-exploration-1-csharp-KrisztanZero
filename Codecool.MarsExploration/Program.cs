@@ -51,11 +51,11 @@ internal class Program
 
         var mountainsCfg = new MapElementConfiguration(mountainSymbol, "mountain", new[]
         {
-            new ElementToDimension(2, 20),
+            new ElementToDimension(7, 20),
             new ElementToDimension(1, 30),
         }, 3);
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg };
-        return new MapConfiguration(20, 0.5, elementsCfg);
+        return new MapConfiguration(100, 0.5, elementsCfg);
     }
 }
