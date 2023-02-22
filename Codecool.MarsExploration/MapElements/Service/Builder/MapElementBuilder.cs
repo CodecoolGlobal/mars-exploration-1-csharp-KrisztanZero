@@ -21,9 +21,9 @@ public class MapElementBuilder : IMapElementBuilder
     {
         string[,] myArray = new string[dimension,dimension];
         
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (i < dimension - dimensionGrowth || j < dimension - dimensionGrowth)
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (i < dimension - dimensionGrowth && j < dimension - dimensionGrowth)
                 {
                     myArray[i, j] = symbol;
                 }
