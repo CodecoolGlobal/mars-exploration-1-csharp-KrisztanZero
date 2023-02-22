@@ -15,7 +15,7 @@ public class MapElementPlacer : IMapElementPlacer
         
         // check if area at coordinate is available
         bool coordinateIsTaken = false;
-        for (int i = 0; i < element.Dimension; i++)
+        for (int i = 0; i < map.GetLength(0); i++)
         {
             for (var j = 0; j < element.Dimension; j++)
             {
@@ -24,12 +24,11 @@ public class MapElementPlacer : IMapElementPlacer
                     coordinateIsTaken = true;
                     break;
                 }
-                
             }
-            
+         
         }
 
-        // check adjecent coordinates if that prevents element from being placed on map
+        // check adjacent coordinates if that prevents element from being placed on map
 
         return elementIsOnMap && !coordinateIsTaken;
     }
