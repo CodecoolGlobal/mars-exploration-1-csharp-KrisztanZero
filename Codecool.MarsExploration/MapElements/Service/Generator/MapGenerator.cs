@@ -16,8 +16,7 @@ public class MapGenerator : IMapGenerator
     public Map Generate(MapConfiguration mapConfig)
     {
         var mapElements = _mapElementsGenerator.CreateAll(mapConfig);
-        var mapSize = (int)(Math.Sqrt(mapConfig.MapSize));
-        var coordinate = _calculator.GetRandomCoordinate(mapSize);
+        var coordinate = _calculator.GetRandomCoordinate(mapConfig.MapSize);
 
         string?[,] map = GetMap(mapConfig.MapSize);
 
@@ -32,12 +31,14 @@ public class MapGenerator : IMapGenerator
         return new Map(map);
     }
 
+
     private string[,] GetMap(int mapSize)
     {
-        string[,] mapRepresentation = new string[(int)Math.Sqrt(mapSize), (int)Math.Sqrt(mapSize)];
-        for (int i = 0; i < Math.Sqrt(mapSize); i++)
+        var mapRepresentation = new string[mapSize, mapSize];
+
+        for (int i = 0; i < mapSize; i++)
         {
-            for (int j = 0; j < Math.Sqrt(mapSize); j++)
+            for (int j = 0; j < mapSize; j++)
             {
                 mapRepresentation[i, j] = " ";
             }
