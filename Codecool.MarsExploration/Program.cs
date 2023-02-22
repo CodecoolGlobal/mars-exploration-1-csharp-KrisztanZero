@@ -38,7 +38,7 @@ internal class Program
         var mapFileWriter = new MapFileWriter();
         for (int i = 0; i < count; i++)
         {
-            mapFileWriter.WriteMapFile(mapGenerator.Generate(mapConfig), $"Output/MapFile/map{i}.txt");
+            mapFileWriter.WriteMapFile(mapGenerator.Generate(mapConfig), $"map{i}.txt");
         }
     }
 
@@ -56,6 +56,6 @@ internal class Program
         }, 3);
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg };
-        return new MapConfiguration(1000, 0.5, elementsCfg);
+        return new MapConfiguration(20, 0.5, elementsCfg);
     }
 }
