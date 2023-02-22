@@ -23,10 +23,13 @@ public class MapGenerator : IMapGenerator
         foreach (var mapElement in mapElements)
         {
             var coordinate = _calculator.GetRandomCoordinate(mapConfig.MapSize);
-            if (_placer.CanPlaceElement(mapElement, map, coordinate))
+            
+            while (!_placer.CanPlaceElement(mapElement, map, coordinate))
             {
-                _placer.PlaceElement(mapElement, map, coordinate);
+                coordinate = _calculator.GetRandomCoordinate(mapConfig.MapSize);
             }
+            _placer.PlaceElement(mapElement, map, coordinate);
+            
         }
 
         return new Map(map);
