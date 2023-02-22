@@ -15,11 +15,11 @@ public class MapElementPlacer : IMapElementPlacer
         
         // check if area at coordinate is available
         bool coordinateIsTaken = false;
-        for (int i = 0; i < map.GetLength(0); i++)
+        for (int i = 0; i < element.Dimension; i++)
         {
             for (var j = 0; j < element.Dimension; j++)
             {
-                if (map[i + coordinate.Y,j + coordinate.X]  != " ")
+                if (map[i + coordinate.Y, j + coordinate.X]  != " ")
                 {
                     coordinateIsTaken = true;
                     break;
