@@ -38,7 +38,7 @@ internal class Program
         var mapFileWriter = new MapFileWriter();
         for (int i = 0; i < count; i++)
         {
-            mapFileWriter.WriteMapFile(mapGenerator.Generate(mapConfig), "Output/MapFile/map.txt");
+            mapFileWriter.WriteMapFile(mapGenerator.Generate(mapConfig), $"Output/MapFile/map{i}.txt");
         }
     }
 
