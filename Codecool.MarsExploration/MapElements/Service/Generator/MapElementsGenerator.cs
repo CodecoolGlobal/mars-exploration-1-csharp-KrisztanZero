@@ -37,10 +37,10 @@ public class MapElementsGenerator : IMapElementsGenerator
             {
                 for (int i = 0; i < elementsToDimension.ElementCount; i++)
                 {
-                    _mapElementBuilder.Build(elementsToDimension.Dimension, mapElementConfiguration.Symbol, mapElementConfiguration.Name, mapElementConfiguration.DimensionGrowth,mapElementConfiguration.PreferredLocationSymbol);
+                    mapElements.Add(_mapElementBuilder.Build(elementsToDimension.Dimension, mapElementConfiguration.Symbol, mapElementConfiguration.Name, mapElementConfiguration.DimensionGrowth, mapElementConfiguration.PreferredLocationSymbol));
                 }
             }
         }
-        throw new NotImplementedException();
+        return mapElements;
     }
 };
