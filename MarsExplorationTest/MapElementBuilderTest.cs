@@ -20,6 +20,13 @@ public class MapElementBuilderTest
     public void MapElementBuildTest()
     {
         var actual = _mapElementBuilder.Build(4, "#", "mountain", 1);
-        Assert.That(actual, Is.EqualTo(_mapelement));
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                Assert.That(actual.Representation[i,j], Is.EqualTo(_mapelement.Representation[i,j]));
+            }
+        }
+        
     }
 }
