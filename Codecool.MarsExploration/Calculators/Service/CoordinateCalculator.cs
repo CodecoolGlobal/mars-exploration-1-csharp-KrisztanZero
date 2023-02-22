@@ -6,17 +6,16 @@ public class CoordinateCalculator : ICoordinateCalculator
 {
     private readonly Random _random = new();
 
-    // add MapSize to constructor
-    public Coordinate GetRandomCoordinate(int dimension)
+    
+    public Coordinate GetRandomCoordinate(int dimensionOfMap) // renamed for clarity, originally dimension
     {
-        // check if element is not outside map - once mapgeneration is ready
-        // upper limit is MapConfiguration.MapSize - dimension
-        var x = _random.Next();
-        var y = _random.Next();
+        
+        var x = _random.Next(dimensionOfMap);
+        var y = _random.Next(dimensionOfMap);
         return new Coordinate(x, y);
     }
 
-    // check if adjacent coordinate is in the map
+    
     public IEnumerable<Coordinate> GetAdjacentCoordinates(Coordinate coordinate, int dimension)
     {
         List<Coordinate> adjacentCoordinates = new List<Coordinate>();

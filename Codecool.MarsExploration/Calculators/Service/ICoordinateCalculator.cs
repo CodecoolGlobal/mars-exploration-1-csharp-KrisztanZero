@@ -5,7 +5,7 @@ namespace Codecool.MarsExploration.Calculators.Service;
 
 public interface ICoordinateCalculator
 {
-    Coordinate GetRandomCoordinate(int dimension);
+    Coordinate GetRandomCoordinate(int dimensionOfMap);
     IEnumerable<Coordinate> GetAdjacentCoordinates(Coordinate coordinate, int dimension);
     public IEnumerable<Coordinate> GetAdjacentCoordinates(IEnumerable<Coordinate> coordinates, int dimension);
 }
