@@ -16,12 +16,13 @@ public class MapGenerator : IMapGenerator
     public Map Generate(MapConfiguration mapConfig)
     {
         var mapElements = _mapElementsGenerator.CreateAll(mapConfig);
-        var coordinate = _calculator.GetRandomCoordinate(mapConfig.MapSize);
+        
 
         string?[,] map = GetMap(mapConfig.MapSize);
 
         foreach (var mapElement in mapElements)
         {
+            var coordinate = _calculator.GetRandomCoordinate(mapConfig.MapSize);
             if (_placer.CanPlaceElement(mapElement, map, coordinate))
             {
                 _placer.PlaceElement(mapElement, map, coordinate);
