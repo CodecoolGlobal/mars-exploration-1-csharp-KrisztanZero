@@ -9,6 +9,7 @@ public class MapFileWriter : IMapFileWriter
     public void WriteMapFile(Map map, string file)
     {
         var text = map.ToString();
-        File.WriteAllText(file, text);
+        var replacedText = text.Replace(".", " ");
+        File.WriteAllText(file, replacedText);
     }
 }
