@@ -6,18 +6,18 @@ public class MapConfigurationValidator : IMapConfigurationValidator
 {
     public bool Validate(MapConfiguration mapConfig)
     {
-        return CheckTotalNumberOfElements(mapConfig) && CheckConfigForInput(mapConfig) &&
+        return CheckTotalDimensionOfElements(mapConfig) && CheckConfigForInput(mapConfig) &&
                CheckValidDimensionOfElements(mapConfig);
     }
 
-    private static bool CheckTotalNumberOfElements(MapConfiguration mapConfig)
+    private static bool CheckTotalDimensionOfElements(MapConfiguration mapConfig)
     {
-        int totalElementCount =
+        int totalElementDimension =
             mapConfig.MapElementConfigurations.Sum(config => config.ElementsToDimensions.Sum(e => e.Dimension));
 
         int maxElementCount = (int)(mapConfig.MapSize * mapConfig.MapSize * mapConfig.ElementToSpaceRatio * 0.5);
 
-        return totalElementCount < maxElementCount;
+        return totalElementDimension < maxElementCount;
     }
 
     private static bool CheckValidDimensionOfElements(MapConfiguration mapConfig)

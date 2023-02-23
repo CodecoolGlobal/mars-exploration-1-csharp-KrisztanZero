@@ -13,24 +13,21 @@ internal class Program
 
     public static void Main(string[] args)
     {
+        IMapGenerator mapGenerator = new MapGenerator();
+        
         Console.WriteLine("Mars Exploration Sprint 1");
         var mapConfig = GetConfiguration();
+        if (mapConfig.MapSize == -1)
+        {
+            Console.WriteLine("Map size is too small for the total dimension of elements!");
+        }
+        else
+        {
+            CreateAndWriteMaps(3, mapGenerator, mapConfig);
 
-        IDimensionCalculator dimensionCalculator = new DimensionCalculator();
-        ICoordinateCalculator coordinateCalculator = new CoordinateCalculator();
-
-        IMapElementBuilder mapElementFactory = new MapElementBuilder();
-        IMapElementsGenerator mapElementsGenerator = new MapElementsGenerator();
-
-        IMapConfigurationValidator mapConfigValidator = new MapConfigurationValidator();
-        IMapElementPlacer mapElementPlacer = new MapElementPlacer();
-
-        IMapGenerator mapGenerator = new MapGenerator();
-
-        CreateAndWriteMaps(3, mapGenerator, mapConfig);
-
-        Console.WriteLine("Mars maps successfully generated.");
-        Console.ReadKey();
+            Console.WriteLine("Mars maps successfully generated.");
+            Console.ReadKey();
+        }
     }
 
     private static void CreateAndWriteMaps(int count, IMapGenerator mapGenerator, MapConfiguration mapConfig)
@@ -44,6 +41,8 @@ internal class Program
 
     private static MapConfiguration GetConfiguration()
     {
+        IMapConfigurationValidator mapConfigValidator = new MapConfigurationValidator();
+        
         const string mountainSymbol = "#";
         const string pitSymbol = "&";
         const string mineralSymbol = "%";
@@ -75,7 +74,9 @@ internal class Program
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
-        return new MapConfiguration(60, 0.5, elementsCfg);
+        var mapCfg = new MapConfiguration(60, 0.5, elementsCfg);
+        
+        return mapConfigValidator.Validate(mapCfg) ? mapCfg : new MapConfiguration(-1, 0.5, elementsCfg);
 
     }
 }
