@@ -74,8 +74,10 @@ internal class Program
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
-        var mapCfg = new MapConfiguration(60, 0.5, elementsCfg);
+        var mapCfg = new MapConfiguration(60, 0.5, elementsCfg); 
         
+        
+        // even if element ot space ration is right the program might not be able to use all the available space because of element sizes and shapes
         return mapConfigValidator.Validate(mapCfg) ? mapCfg : new MapConfiguration(-1, 0.5, elementsCfg);
 
     }
