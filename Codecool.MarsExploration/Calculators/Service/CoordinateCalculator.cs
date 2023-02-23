@@ -10,8 +10,8 @@ public class CoordinateCalculator : ICoordinateCalculator
     public Coordinate GetRandomCoordinate(int dimensionOfMap) // renamed for clarity, originally dimension
     {
         
-        var x = _random.Next(dimensionOfMap);
-        var y = _random.Next(dimensionOfMap);
+        var x = _random.Next(1, dimensionOfMap + 1);
+        var y = _random.Next(1, dimensionOfMap + 1);
         return new Coordinate(x, y);
     }
 

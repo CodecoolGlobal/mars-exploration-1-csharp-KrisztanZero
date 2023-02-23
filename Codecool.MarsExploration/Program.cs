@@ -64,13 +64,13 @@ internal class Program
         {
             new ElementToDimension(10, 1),
             
-        }, 0);
+        }, 0, mountainSymbol);
         
         var waterCfg = new MapElementConfiguration(waterSymbol, "water", new[]
         {
             new ElementToDimension(10, 1),
             
-        }, 0);
+        }, 0, pitSymbol);
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
