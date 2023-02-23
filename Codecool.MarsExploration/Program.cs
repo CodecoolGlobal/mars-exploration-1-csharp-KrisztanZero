@@ -50,31 +50,31 @@ internal class Program
 
         var mountainsCfg = new MapElementConfiguration(mountainSymbol, "mountain", new[]
         {
-            new ElementToDimension(7, 9),
-            new ElementToDimension(1, 4),
+            new ElementToDimension(7, 90),
+            new ElementToDimension(3, 40),
         }, 3);
         
         var pitCfg = new MapElementConfiguration(pitSymbol, "pit", new[]
         {
-            new ElementToDimension(5, 9),
-            new ElementToDimension(1, 4),
+            new ElementToDimension(5, 90),
+            new ElementToDimension(3, 40),
         }, 10);
         
         var mineralCfg = new MapElementConfiguration(mineralSymbol, "mineral", new[]
         {
-            new ElementToDimension(10, 1),
+            new ElementToDimension(50, 1),
             
         }, 0, mountainSymbol);
         
         var waterCfg = new MapElementConfiguration(waterSymbol, "water", new[]
         {
-            new ElementToDimension(10, 1),
+            new ElementToDimension(50, 1),
             
         }, 0, pitSymbol);
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
-        var mapCfg = new MapConfiguration(60, 0.5, elementsCfg); 
+        var mapCfg = new MapConfiguration(100, 0.5, elementsCfg); 
         
         
         // even if element ot space ration is right the program might not be able to use all the available space because of element sizes and shapes
