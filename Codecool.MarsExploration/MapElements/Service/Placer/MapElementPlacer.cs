@@ -39,7 +39,7 @@ public class MapElementPlacer : IMapElementPlacer
         {
             for (int j = 0; j < element.Dimension; j++)
             {
-                map[coordinate.X + i, coordinate.Y + j] = element.Representation[i, j];
+                map[coordinate.Y + i, coordinate.X + j] = element.Representation[i, j];
             }
         }
     }

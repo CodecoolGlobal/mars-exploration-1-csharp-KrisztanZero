@@ -54,8 +54,14 @@ internal class Program
             new ElementToDimension(7, 9),
             new ElementToDimension(1, 4),
         }, 3);
+        
+        var pitCfg = new MapElementConfiguration(pitSymbol, "pit", new[]
+        {
+            new ElementToDimension(5, 9),
+            new ElementToDimension(1, 4),
+        }, 10);
 
-        List<MapElementConfiguration> elementsCfg = new() { mountainsCfg };
+        List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg };
 
         return new MapConfiguration(60, 0.5, elementsCfg);
 

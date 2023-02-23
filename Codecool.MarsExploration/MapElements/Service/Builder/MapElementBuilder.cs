@@ -19,22 +19,22 @@ public class MapElementBuilder : IMapElementBuilder
 
     public string?[,] Representation(int dimension, int dimensionGrowth, string symbol)
     {
-        string[,] myArray = new string[dimension,dimension];
+        string[,] representation = new string[dimension,dimension];
         
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 if (i < dimension - dimensionGrowth && j < dimension - dimensionGrowth)
                 {
-                    myArray[i, j] = symbol;
+                    representation[i, j] = symbol;
                 }
                 else
                 {
-                    myArray[i, j] = " ";
+                    representation[i, j] = ".";
                 }
             }
         }
 
-        return myArray;
+        return representation;
     }
     
 }
