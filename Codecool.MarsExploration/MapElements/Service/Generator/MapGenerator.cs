@@ -36,7 +36,7 @@ public class MapGenerator : IMapGenerator
     }
 
 
-    private string[,] GetMap(int mapSize)
+    private static string[,] GetMap(int mapSize)
     {
         var mapRepresentation = new string[mapSize, mapSize];
 

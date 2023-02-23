@@ -4,10 +4,9 @@ namespace Codecool.MarsExploration.MapElements.Model;
 
 public record Map(string?[,] Representation, bool SuccessfullyGenerated = false)
 {
-    // In starter code this was protected and static so we couldn't test it from outside 👇
     protected static string CreateStringRepresentation(string?[,] arr)
     {
-        StringBuilder stringBuilder = new StringBuilder("");
+        var stringBuilder = new StringBuilder();
 
         for (int i = 0; i < arr.GetLength(0); i++)
         {
@@ -16,8 +15,7 @@ public record Map(string?[,] Representation, bool SuccessfullyGenerated = false)
                 stringBuilder.Append(arr[i,j]);
             }
 
-            stringBuilder.Append('\n');
-            //stringBuilder.AppendLine();
+            stringBuilder.Append(Environment.NewLine);
         }
 
         return stringBuilder.ToString();

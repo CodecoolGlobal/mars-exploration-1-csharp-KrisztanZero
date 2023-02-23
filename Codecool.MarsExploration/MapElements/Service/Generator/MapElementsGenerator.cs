@@ -6,27 +6,7 @@ namespace Codecool.MarsExploration.MapElements.Service.Generator;
 
 public class MapElementsGenerator : IMapElementsGenerator
 {
-    /*
-     public record MapConfiguration(
-        int MapSize,
-        double ElementToSpaceRatio,
-        IEnumerable<MapElementConfiguration> MapElementConfigurations);
-    */
-    
-    /*
-    public record MapElementConfiguration(
-        string Symbol,
-        string Name,
-        IEnumerable<ElementToDimension> ElementsToDimensions,
-        int DimensionGrowth = 0,
-        string? PreferredLocationSymbol = null);
-    */
-    
-    //public record ElementToDimension(int ElementCount, int Dimension);
-    
-    //public MapElement Build(int size, string symbol, string name, int dimensionGrowth, string? preferredLocationSymbol = null)
-
-    private MapElementBuilder _mapElementBuilder = new MapElementBuilder();
+    private readonly MapElementBuilder _mapElementBuilder = new();
     
     public IEnumerable<MapElement> CreateAll(MapConfiguration mapConfig)
     {
@@ -37,7 +17,12 @@ public class MapElementsGenerator : IMapElementsGenerator
             {
                 for (int i = 0; i < elementsToDimension.ElementCount; i++)
                 {
-                    mapElements.Add(_mapElementBuilder.Build(elementsToDimension.Dimension, mapElementConfiguration.Symbol, mapElementConfiguration.Name, mapElementConfiguration.DimensionGrowth, mapElementConfiguration.PreferredLocationSymbol));
+                    mapElements.Add(_mapElementBuilder
+                        .Build(elementsToDimension.Dimension,
+                            mapElementConfiguration.Symbol,
+                            mapElementConfiguration.Name,
+                            mapElementConfiguration.DimensionGrowth,
+                            mapElementConfiguration.PreferredLocationSymbol));
                 }
             }
         }
