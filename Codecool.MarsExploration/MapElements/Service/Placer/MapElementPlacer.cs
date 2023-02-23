@@ -6,74 +6,63 @@ namespace Codecool.MarsExploration.MapElements.Service.Placer;
 
 public class MapElementPlacer : IMapElementPlacer
 {
-    // MapElement(string?[,] Representation, string Name, int Dimension, string? PreferredLocationSymbol = null) : Map(Representation)
-
     public bool CanPlaceElement(MapElement element, string?[,] map, Coordinate coordinate)
     {
-        // check if element is still on map
-        bool elementIsOnMap = coordinate.X + element.Dimension < map.GetLength(0) &&
-                              coordinate.Y + element.Dimension < map.GetLength(1);
-        if (!elementIsOnMap) return false;
-
-        bool canPlaceElement = false;
-
-        CoordinateCalculator coordinateCalculator = new CoordinateCalculator();
+        CoordinateCalculator coordinateCalculator = new();
         
+        var elementIsOnMap = coordinate.X + element.Dimension < map.GetLength(0) &&
+                             coordinate.Y + element.Dimension < map.GetLength(1);
+        if (!elementIsOnMap) return false;
+        
+        var coordinateIsTaken = false;
+
+        var canPlaceElement = false;
+
         if (element.PreferredLocationSymbol != null)
         {
             var adjacentCoordinates = coordinateCalculator.GetAdjacentCoordinates(coordinate, 1).ToList();
-            foreach (var c in adjacentCoordinates.Where(c => c.X > map.GetLength(1) || c.Y > map.GetLength(0)))
+            
+            /*foreach (var c in adjacentCoordinates.Where(c =>
+                         c.X > map.GetLength(1) ||
+                         c.Y > map.GetLength(0) ||
+                         c.X < 0 ||
+                         c.Y < 0))
             {
                 adjacentCoordinates.Remove(c);
-            }
+            }*/
             
             switch (element.Name)
             {
                 case "mineral":
                     foreach (var c in adjacentCoordinates)
-                    {
-                        if (map[c.Y, c.X] == "#" && (map[coordinate.Y, coordinate.X] == " " || (map[coordinate.Y, coordinate.X] == ".")))
+                        if (map[c.Y, c.X] == "#")
                         {
-                            canPlaceElement = true;
+                            return true;
                         }
-                    }
                     break;
                 case "water":
-                    foreach (var c in adjacentCoordinates)
-                    {
-                        if (map[c.Y, c.X] == "&" && (map[coordinate.Y, coordinate.X] == " " || (map[coordinate.Y, coordinate.X] == ".")))
+                    foreach (var c in adjacentCoordinates) 
+                        if(map[c.Y, c.X] == "&")
                         {
-                            canPlaceElement = true;
+                            return true;
                         }
-                    }
                     break;
-                default:
-                    canPlaceElement = false;
-                    break;
-                    
             }
         }
         else
         {
-            for (int i = 0; i < element.Dimension; i++)
+            for (var i = 0; i < element.Dimension; i++)
             {
                 for (var j = 0; j < element.Dimension; j++)
                 {
-                    if (map[i + coordinate.Y, j + coordinate.X] != " ")
-                    {
-                        canPlaceElement = false;
-                        break;
-                    }
-                    canPlaceElement = true;
+                    if (map[i + coordinate.Y, j + coordinate.X] == " ") continue;
+                    coordinateIsTaken = true;
+                    break;
                 }
-                
             }
-            
-            
         }
-
-
-        return elementIsOnMap && canPlaceElement;
+        
+        return elementIsOnMap && canPlaceElement && !coordinateIsTaken;
     }
 
     public void PlaceElement(MapElement element, string?[,] map, Coordinate coordinate)
