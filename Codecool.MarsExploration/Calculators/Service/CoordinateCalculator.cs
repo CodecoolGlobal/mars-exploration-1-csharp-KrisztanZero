@@ -7,11 +7,11 @@ public class CoordinateCalculator : ICoordinateCalculator
     private readonly Random _random = new();
 
     
-    public Coordinate GetRandomCoordinate(int dimensionOfMap) // renamed for clarity, originally dimension
+    public Coordinate GetRandomCoordinate(int dimension)
     {
         
-        var x = _random.Next(1, dimensionOfMap + 1);
-        var y = _random.Next(1, dimensionOfMap + 1);
+        var x = _random.Next(1, dimension + 1);
+        var y = _random.Next(1, dimension + 1);
         return new Coordinate(x, y);
     }
 
@@ -41,6 +41,14 @@ public class CoordinateCalculator : ICoordinateCalculator
 
     public IEnumerable<Coordinate> GetAdjacentCoordinates(IEnumerable<Coordinate> coordinates, int dimension)
     {
-        throw new NotImplementedException();
+        var adjacentCoordinates = new List<Coordinate>(coordinates);
+
+        foreach (var coordinate in coordinates)
+        {
+            var adjacentCoords = GetAdjacentCoordinates(coordinate, dimension);
+            adjacentCoordinates.AddRange(adjacentCoords);
+        }
+        
+        return adjacentCoordinates;
     }
 }
