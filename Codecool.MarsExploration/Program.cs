@@ -74,7 +74,7 @@ internal class Program
 
         List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
-        var mapCfg = new MapConfiguration(100, 0.5, elementsCfg); 
+        var mapCfg = new MapConfiguration(150, 0.5, elementsCfg); 
         
         
         // even if element ot space ration is right the program might not be able to use all the available space because of element sizes and shapes

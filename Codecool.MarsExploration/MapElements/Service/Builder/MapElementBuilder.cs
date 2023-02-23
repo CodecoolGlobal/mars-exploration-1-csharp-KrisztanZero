@@ -21,15 +21,17 @@ public class MapElementBuilder : IMapElementBuilder
     {
         string[,] representation = new string[dimension,dimension];
         
+        
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (i < dimension - dimensionGrowth && j < dimension - dimensionGrowth)
+                if (i < dimensionGrowth || j < dimensionGrowth || i >= dimension - dimensionGrowth ||
+                    j >= dimension - dimensionGrowth)
                 {
-                    representation[i, j] = symbol;
+                    representation[i, j] = ".";
                 }
                 else
                 {
-                    representation[i, j] = ".";
+                    representation[i, j] = symbol;
                 }
             }
         }
