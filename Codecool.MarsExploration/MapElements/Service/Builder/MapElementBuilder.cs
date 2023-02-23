@@ -33,6 +33,16 @@ public class MapElementBuilder : IMapElementBuilder
                 }
             }
         }
+        // for (int i = 0; i < dimension; i++)
+        // {
+        //     var symbolRandomCoordinate = _calculator.GetRandomCoordinate(dimension + dimensionGrowth);
+        //     representation[symbolRandomCoordinate.Y, symbolRandomCoordinate.X] = symbol;
+        // }
+        // for (int i = 0; i < dimension; i++) {
+        //     
+        //     var dimensionGrowthRandomCoordinate = _calculator.GetRandomCoordinate(dimension + dimensionGrowth);
+        //     representation[dimensionGrowthRandomCoordinate.Y, dimensionGrowthRandomCoordinate.X] = ".";
+        // }
 
         return representation;
     }
