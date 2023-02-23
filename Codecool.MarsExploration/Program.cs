@@ -8,7 +8,6 @@ using Codecool.MarsExploration.Output.Service;
 
 internal class Program
 {
-    //You can change this to any directory you like
     private static readonly string WorkDir = AppDomain.CurrentDomain.BaseDirectory;
 
     public static void Main(string[] args)
@@ -76,8 +75,6 @@ internal class Program
 
         var mapCfg = new MapConfiguration(150, 0.5, elementsCfg); 
         
-        
-        // even if element ot space ration is right the program might not be able to use all the available space because of element sizes and shapes
         return mapConfigValidator.Validate(mapCfg) ? mapCfg : new MapConfiguration(-1, 0.5, elementsCfg);
 
     }

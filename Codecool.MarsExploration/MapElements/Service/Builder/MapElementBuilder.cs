@@ -7,8 +7,6 @@ public class MapElementBuilder : IMapElementBuilder
 {
     public MapElement Build(int size, string symbol, string name, int dimensionGrowth, string? preferredLocationSymbol = null)
     {
-        // string?[,] Representation, string Name, int Dimension, string? PreferredLocationSymbol = null
-        
         var dimensionCalculator = new DimensionCalculator();
         var dimension = dimensionCalculator.CalculateDimension(size, dimensionGrowth);
         var representation = Representation(dimension, dimensionGrowth, symbol);
