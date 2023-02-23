@@ -61,8 +61,8 @@ public class MapElementPlacer : IMapElementPlacer
                 {
                     if (map[i + coordinate.Y, j + coordinate.X] != " ")
                     {
-                        canPlaceElement = false;
-                        break;
+                        return false;
+                        
                     }
                     canPlaceElement = true;
                 }
@@ -73,7 +73,7 @@ public class MapElementPlacer : IMapElementPlacer
         }
 
 
-        return elementIsOnMap && canPlaceElement;
+        return canPlaceElement;
     }
 
     public void PlaceElement(MapElement element, string?[,] map, Coordinate coordinate)
