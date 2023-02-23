@@ -60,8 +60,20 @@ internal class Program
             new ElementToDimension(5, 9),
             new ElementToDimension(1, 4),
         }, 10);
+        
+        var mineralCfg = new MapElementConfiguration(mineralSymbol, "mineral", new[]
+        {
+            new ElementToDimension(10, 1),
+            
+        }, 0);
+        
+        var waterCfg = new MapElementConfiguration(waterSymbol, "water", new[]
+        {
+            new ElementToDimension(10, 1),
+            
+        }, 0);
 
-        List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg };
+        List<MapElementConfiguration> elementsCfg = new() { mountainsCfg, pitCfg, mineralCfg, waterCfg };
 
         return new MapConfiguration(60, 0.5, elementsCfg);
 
